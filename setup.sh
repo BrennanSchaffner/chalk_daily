@@ -15,5 +15,14 @@ cd ./chalk_daily
 
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
-xdg-open https://developers.google.com/sheets/api/quickstart/go
+FILE=/home/pi/credentials.json
+if [ -f "$FILE" ]; then
+    echo "$FILE exists."
+else 
+    echo "$FILE does not exist."
+    xdg-open https://developers.google.com/sheets/api/quickstart/go
+fi
+
+
+
 
