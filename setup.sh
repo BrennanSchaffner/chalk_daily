@@ -11,6 +11,7 @@ sudo apt install git
 
 git clone https://github.com/BrennanSchaffner/chalk_daily.git
 
-sudo apt install git
+cd ./chalk_daily
 
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+
