@@ -23,16 +23,16 @@ def display():
     # 1st parameter is the font file
     # which is present in pygame.
     # 2nd parameter is size of the font
-    date_font = pg.font.Font(r'/home\pi\chalk_daily\chawp.ttf', 32)
-    quote_font = pg.font.Font(r'/home\pi\chalk_daily\chawp.ttf', 50)
-    event_font = pg.font.Font(r'/home\pi\chalk_daily\chawp.ttf', 28)
+    date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 32)
+    quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 50)
+    event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 28)
 
 
     # set the pygame window name
     pg.display.set_caption('Chalk Daily')
 
     # create a surface object, image is drawn on it.
-    chalkboard = pg.image.load(r'/home\pi\chalk_daily\green_chalkboard.jpg')
+    chalkboard = pg.image.load(r'/home/pi/chalk_daily/green_chalkboard.jpg')
 
     # copying the image surface object
     # to the display surface object at
