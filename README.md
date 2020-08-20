@@ -19,4 +19,4 @@ in terminal:
 
 ## Start it
 * Run the Chalk Daily desktop shortcut.
-* give it the link to your google sheet
+* give it the link to your google sheet formatted like [this](./example_spreadsheet.jpg)
