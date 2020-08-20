@@ -9,7 +9,7 @@ from datetime import date
 import calendar
 import pygame as pg
 import easygui
-
+import sys
 
 def main():
     get_sheet_url()
@@ -18,6 +18,8 @@ def main():
 
 def get_sheet_url():
     url = easygui.enterbox("Your Google sheet URL")
+    if url == '':
+        sys.exit()
 
 
 def display():
