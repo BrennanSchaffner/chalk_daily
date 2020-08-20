@@ -8,7 +8,6 @@ from sheet_reader import SheetReader
 from datetime import date
 import calendar
 import pygame as pg
-import sys
 
 
 def main():
