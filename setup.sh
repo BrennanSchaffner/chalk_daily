@@ -10,9 +10,9 @@ sudo apt update
 sudo apt install git
 
 git clone https://github.com/BrennanSchaffner/chalk_daily.git
-git pull
 
 cd ./chalk_daily
+git pull
 
 pip install easygui
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
