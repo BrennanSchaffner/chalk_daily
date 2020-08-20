@@ -23,16 +23,16 @@ def display():
     # 1st parameter is the font file
     # which is present in pygame.
     # 2nd parameter is size of the font
-    date_font = pg.font.Font(r'C:\Users\brenn\Desktop\New folder\calendarproject\venv\chawp.ttf', 32)
-    quote_font = pg.font.Font(r'C:\Users\brenn\Desktop\New folder\calendarproject\venv\chawp.ttf', 50)
-    event_font = pg.font.Font(r'C:\Users\brenn\Desktop\New folder\calendarproject\venv\chawp.ttf', 28)
+    date_font = pg.font.Font(r'.\chawp.ttf', 32)
+    quote_font = pg.font.Font(r'.\chawp.ttf', 50)
+    event_font = pg.font.Font(r'.\chawp.ttf', 28)
 
 
     # set the pygame window name
     pg.display.set_caption('Chalk Daily')
 
     # create a surface object, image is drawn on it.
-    chalkboard = pg.image.load(r'C:\Users\brenn\Desktop\New folder\calendarproject\venv\green_chalkboard.jpg')
+    chalkboard = pg.image.load(r'.\green_chalkboard.jpg')
 
     # copying the image surface object
     # to the display surface object at
@@ -73,7 +73,7 @@ def display():
 
         info_dict = what_data(date_str)
         if info_dict['quote'] == '':
-            info_dict['quote'] = 'Add a quote! - Brennan'
+            info_dict['quote'] = 'Add quotes from people you respect! - Brennan'
         if len(info_dict['quote']) <= 26:
             quote_text = quote_font.render(info_dict['quote'], True, white)
             quote_rect = quote_text.get_rect()
