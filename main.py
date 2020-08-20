@@ -11,6 +11,7 @@ import pygame as pg
 import easygui
 import sys
 
+
 def main():
     get_sheet_url()
     display()
@@ -18,7 +19,7 @@ def main():
 
 def get_sheet_url():
     url = easygui.enterbox("Your Google sheet URL")
-    if url == '':
+    if url == '' or url is None:
         sys.exit()
 
 
@@ -33,7 +34,6 @@ def display():
     date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 32)
     quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 50)
     event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 28)
-
 
     # set the pygame window name
     pg.display.set_caption('Chalk Daily')
