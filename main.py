@@ -8,10 +8,16 @@ from sheet_reader import SheetReader
 from datetime import date
 import calendar
 import pygame as pg
+import easygui
 
 
 def main():
+    get_sheet_url()
     display()
+
+
+def get_sheet_url():
+    url = easygui.enterbox("Your Google sheet URL")
 
 
 def display():

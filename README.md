@@ -31,7 +31,7 @@ You need a google account.
 in terminal:
 *make sure you are in home/pi with 'pwd'
 *sh ./chalk_daily/setup.sh
-* At one point, you will be asked to enable the google sheets api. 
-** follow the steps
-** download credentials.json and move it into /home/pi/ using file explorer
+* At one point, you will be asked to enable the google sheets api and sign into google. 
+** follow the steps (press Next, select 'Desktop app' and Create)
+** Download client configuration. Then move credentials.json from downloads into /home/pi/ using the file explorer
 	(If you put it in the git repository, it may get overwritten upon updates)
