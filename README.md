@@ -1,7 +1,7 @@
-### Chalk Daily
+# Chalk Daily
 ## by Brennan Schaffner
 
-# Set-up 
+## Set-up 
 
 Connect to the internet. 
 You need a google account. 
@@ -18,5 +18,11 @@ in terminal:
 * Copy the Chalk Daily desktop shortcut to your desktop (or where ever you want it)
 
 ## Start it
-* Run the Chalk Daily desktop shortcut.
+* Run the Chalk Daily desktop shortcut (may load for a few seconds)
 * give it the link to your google sheet formatted like [this](./example_spreadsheet.jpg)
+
+## If you want to update (I will probably tell you if I made changes)
+* open terminal
+* cd chalk_daily/
+* git pull
+* I might change this method to be automatic someday via the setup script or something
