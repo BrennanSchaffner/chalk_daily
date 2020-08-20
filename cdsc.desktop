@@ -1,0 +1,8 @@
+[Desktop Entry] 
+Type=Application
+Encoding=UTF-8
+Name= Chalk Daily
+Exec=/usr/bin/python /home/pi/chalk_daily/main.py
+Icon=/home/pi/chalk_daily/Chalkboard-icon.png
+StartupNotify=false
+Terminal=false
