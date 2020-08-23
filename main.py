@@ -33,7 +33,8 @@ def get_sheet_url():
 def display():
     successes, failures = pygame.init()
     print("{0} successes and {1} failures".format(successes, failures))
-    window = pg.display.set_mode((720, 480), pg.FULLSCREEN, pg.RESIZABLE)
+    width, height = pygame.display.Info().current_w, pygame.display.Info().current_h
+    window = pg.display.set_mode((width, height), pg.FULLSCREEN, pg.RESIZABLE)
 
     # create a font object.
     # 1st parameter is the font file
