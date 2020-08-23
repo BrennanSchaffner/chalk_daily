@@ -75,70 +75,69 @@ def display():
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     done = True
-        print('breakpoint ??')
 
         # create a text surface object,
         # on which text is drawn on it.
         date_text = date_font.render(date_str, True, white)
-    #
-    #     # create a rectangular object for the
-    #     # text surface object
-    #     date_rect = date_text.get_rect()
-    #
-    #     # set the center of the rectangular object.
-    #     w, h = pg.display.get_surface().get_size()
-    #     date_rect.bottomleft = (w // 8, 7 * h // 8)
-    #
-    #     window.blit(date_text, date_rect)
-    #
-    #     info_dict = what_data(date_str)
-    #     if info_dict['quote'] == '':
-    #         info_dict['quote'] = 'Add quotes from people you respect! - Brennan'
-    #     if len(info_dict['quote']) <= 26:
-    #         quote_text = quote_font.render(info_dict['quote'], True, white)
-    #         quote_rect = quote_text.get_rect()
-    #         quote_rect.midleft = (w // 8, h // 2)
-    #         window.blit(quote_text, quote_rect)
-    #     else:
-    #         quote_str = info_dict['quote']
-    #         quote_text = []
-    #         while len(quote_str) > 26:
-    #             last_space = quote_str.rfind(' ', 0, 26)
-    #             quote_text.append((quote_font.render(quote_str[:last_space], True, white)))
-    #             quote_str = quote_str[last_space:]
-    #         quote_text.append(quote_font.render(quote_str, True, white))
-    #         for line in range(len(quote_text)):
-    #             window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
-    #
-    #     event_font.set_underline(True)
-    #     week_header_text = event_font.render("WEEK VIEW", True, white)
-    #     event_font.set_underline(False)
-    #     window.blit(week_header_text, (4.95 * w // 8, (1 * h // 8)))
-    #
-    #     week_view_text = []
-    #     for line in info_dict['week_events']:
-    #         week_view_text.append(event_font.render(line, True, white))
-    #     for line in range(len(week_view_text)):
-    #         window.blit(week_view_text[line], (4.5 * w // 8, (1.1 * h // 8) + (line+1)*event_font.get_linesize()))
-    #         bottom_of_week_events = (1.1 * h // 8) + (line+1)*event_font.get_linesize()
-    #
-    #     event_font.set_underline(True)
-    #     upcoming_header_text = event_font.render("COMING UP", True, white)
-    #     event_font.set_underline(False)
-    #     window.blit(upcoming_header_text, (4.95 * w // 8, (bottom_of_week_events + h // 8)))
-    #
-    #     upcoming_view_text = []
-    #     for line in info_dict['important_events']:
-    #         upcoming_view_text.append(event_font.render(line, True, white))
-    #     for line in range(len(upcoming_view_text)):
-    #         window.blit(upcoming_view_text[line], (4.5 * w // 8, (bottom_of_week_events + (1.1*h // 8) + (line+1)*event_font.get_linesize())))
-    #
-    #     pg.display.flip()
-    #
-    #     pg.time.wait(100)  # ms
-    #
-    # pg.display.quit()
-    # pg.quit()
+
+        # create a rectangular object for the
+        # text surface object
+        date_rect = date_text.get_rect()
+
+        # set the center of the rectangular object.
+        w, h = pg.display.get_surface().get_size()
+        date_rect.bottomleft = (w // 8, 7 * h // 8)
+
+        window.blit(date_text, date_rect)
+
+        info_dict = what_data(date_str)
+        if info_dict['quote'] == '':
+            info_dict['quote'] = 'Add quotes from people you respect! - Brennan'
+        if len(info_dict['quote']) <= 26:
+            quote_text = quote_font.render(info_dict['quote'], True, white)
+            quote_rect = quote_text.get_rect()
+            quote_rect.midleft = (w // 8, h // 2)
+            window.blit(quote_text, quote_rect)
+        else:
+            quote_str = info_dict['quote']
+            quote_text = []
+            while len(quote_str) > 26:
+                last_space = quote_str.rfind(' ', 0, 26)
+                quote_text.append((quote_font.render(quote_str[:last_space], True, white)))
+                quote_str = quote_str[last_space:]
+            quote_text.append(quote_font.render(quote_str, True, white))
+            for line in range(len(quote_text)):
+                window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
+
+        event_font.set_underline(True)
+        week_header_text = event_font.render("WEEK VIEW", True, white)
+        event_font.set_underline(False)
+        window.blit(week_header_text, (4.95 * w // 8, (1 * h // 8)))
+
+        week_view_text = []
+        for line in info_dict['week_events']:
+            week_view_text.append(event_font.render(line, True, white))
+        for line in range(len(week_view_text)):
+            window.blit(week_view_text[line], (4.5 * w // 8, (1.1 * h // 8) + (line+1)*event_font.get_linesize()))
+            bottom_of_week_events = (1.1 * h // 8) + (line+1)*event_font.get_linesize()
+
+        event_font.set_underline(True)
+        upcoming_header_text = event_font.render("COMING UP", True, white)
+        event_font.set_underline(False)
+        window.blit(upcoming_header_text, (4.95 * w // 8, (bottom_of_week_events + h // 8)))
+
+        upcoming_view_text = []
+        for line in info_dict['important_events']:
+            upcoming_view_text.append(event_font.render(line, True, white))
+        for line in range(len(upcoming_view_text)):
+            window.blit(upcoming_view_text[line], (4.5 * w // 8, (bottom_of_week_events + (1.1*h // 8) + (line+1)*event_font.get_linesize())))
+
+        pg.display.flip()
+        if not done:
+            pg.time.wait(10000)  # ms
+
+    pg.display.quit()
+    pg.quit()
 
 
 def what_data(date_str):
