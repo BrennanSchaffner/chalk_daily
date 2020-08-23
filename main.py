@@ -162,13 +162,13 @@ def what_data(date_str, ss_id):
         ret_struct['week_header'] = "WEEK VIEW"
 
     try:
-        ret_struct['future_header'] = values[0][3]
+        ret_struct['future_header'] = values[0][5]
     except IndexError:
         ret_struct['week_header'] = "COMING UP"
 
     ret_struct['week_events'] = []
     todays_index = None
-    for i in range(len(values)):
+    for i in range(1, len(values)):
         try:
             test = values[i][0][0]
         except IndexError:

@@ -30,8 +30,12 @@ in terminal:
 ** Allow, Allow
 * A token is saved so in the future it will just run without verification
 
+To close, press esc and wait a few seconds. 
+
 ## If you want to update (I will probably tell you if I made changes)
 * open terminal
 * cd chalk_daily/
 * git pull
 * I might change this method to be automatic someday via the setup script or something
+
+
