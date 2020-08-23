@@ -69,7 +69,8 @@ def display(ss_id):
     while not done:
         today = date.today()
         day_name = calendar.day_name[today.weekday()]
-        date_str = day_name + ", " + today.strftime("%B %d, %Y")
+        date_str_no_year = day_name + ", " + today.strftime("%B %d")
+        date_str = date_str_no_year + ", " + today.strftime("%Y")
 
         window.blit(chalkboard, (0, 0))
 
@@ -95,7 +96,7 @@ def display(ss_id):
 
         window.blit(date_text, date_rect)
 
-        info_dict = what_data(date_str, ss_id)
+        info_dict = what_data(date_str, date_str_no_year, ss_id)
         if info_dict['quote'] == '':
             info_dict['quote'] = 'Quotes from people you respect! - Brennan'
         if len(info_dict['quote']) <= 26:
@@ -145,7 +146,7 @@ def display(ss_id):
     pg.quit()
 
 
-def what_data(date_str, ss_id):
+def what_data(date_str, date_str_no_year, ss_id):
     # The ID and range of a sample spreadsheet.
     spreadsheet_id = ss_id
     sheet_range = 'A1:F'
@@ -174,7 +175,7 @@ def what_data(date_str, ss_id):
         except IndexError:
             values[i][0] = 'TBD,TBD'
 
-        if values[i][0] == date_str:
+        if values[i][0] == date_str or date_str_no_year:
             today = values[i]
             todays_index = i
             try:
