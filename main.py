@@ -33,7 +33,7 @@ def test_display(): #####################
     successes, failures = pygame.init()
     print("{0} successes and {1} failures".format(successes, failures))
 
-    screen = pygame.display.set_mode((720, 480))
+    screen = pygame.display.set_mode((720, 480), pg.RESIZABLE)
     clock = pygame.time.Clock()
     FPS = 60  # Frames per second.
 
