@@ -5,6 +5,8 @@
 
 Connect to the internet. 
 You need a google account. 
+Make sure Rasbperry Pi has 5V 2A power supply
+I dont know the RAM requirements, yet. 
 
 ## Just Once
 in terminal:
