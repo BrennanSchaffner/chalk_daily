@@ -18,8 +18,8 @@ import os.path
 def main():
     url = get_sheet_url()
     print("atleast it ran")
-    #display()
-    test_display()
+    display()
+    #test_display()
 
 
 def get_sheet_url():
@@ -27,6 +27,7 @@ def get_sheet_url():
     if url == '' or url is None:
         sys.exit()
     return url
+
 
 def test_display(): #####################
     successes, failures = pygame.init()
@@ -64,9 +65,11 @@ def test_display(): #####################
         screen.blit(image, rect)
         pygame.display.update()  # Or pygame.display.flip()
 
+
 def display():
-    pg.init()
-    window = pg.display.set_mode((0, 0), pg.FULLSCREEN)
+    successes, failures = pygame.init()
+    print("{0} successes and {1} failures".format(successes, failures))
+    window = pg.display.set_mode((720, 480))
 
     # create a font object.
     # 1st parameter is the font file
