@@ -3,12 +3,10 @@
 
 # make desktop icon: https://www.hackster.io/kamal-khan/desktop-shortcut-for-python-script-on-raspberry-pi-fd1c63
 
-
 from sheet_reader import SheetReader
 from datetime import date
 import calendar
 import pygame as pg
-import pygame ######################
 import easygui
 import sys
 import os.path
@@ -17,23 +15,25 @@ import os.path
 
 
 def main():
-    url = get_sheet_url()
-    print("atleast it ran")
-    display()
-    #test_display()
+    ss_id, sheet_id = get_sheet_url()
+    display(ss_id)
+    # test_display()
 
 
 def get_sheet_url():
     url = easygui.enterbox("Your Google sheet URL")
+    after_d = url.split('/d/')[1]
+    spreadsheet_id = after_d.split('/edit#gid=')[0]
+    sheet_id = after_d.split('/edit#gid=')[1]
     if url == '' or url is None:
         sys.exit()
-    return url
+    return spreadsheet_id, sheet_id
 
 
-def display():
-    successes, failures = pygame.init()
+def display(ss_id):
+    successes, failures = pg.init()
     print("{0} successes and {1} failures".format(successes, failures))
-    width, height = pygame.display.Info().current_w, pygame.display.Info().current_h
+    width, height = pg.display.Info().current_w, pg.display.Info().current_h
     window = pg.display.set_mode((width, height), pg.FULLSCREEN, pg.RESIZABLE)
 
     # create a font object.
@@ -49,7 +49,6 @@ def display():
         quote_font = pg.font.Font(r'.\chawp.ttf', 50)
         event_font = pg.font.Font(r'.\chawp.ttf', 28)
 
-
     # set the pygame window name
     pg.display.set_caption('Chalk Daily')
 
@@ -58,7 +57,6 @@ def display():
         chalkboard = pg.image.load(r'/home/pi/chalk_daily/green_chalkboard.jpg')
     else: #############################
         chalkboard = pg.image.load(r'.\green_chalkboard.jpg')
-
 
     # copying the image surface object
     # to the display surface object at
@@ -97,9 +95,9 @@ def display():
 
         window.blit(date_text, date_rect)
 
-        info_dict = what_data(date_str)
+        info_dict = what_data(date_str, ss_id)
         if info_dict['quote'] == '':
-            info_dict['quote'] = 'Add quotes from people you respect! - Brennan'
+            info_dict['quote'] = 'Quotes from people you respect! - Brennan'
         if len(info_dict['quote']) <= 26:
             quote_text = quote_font.render(info_dict['quote'], True, white)
             quote_rect = quote_text.get_rect()
@@ -117,7 +115,7 @@ def display():
                 window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
 
         event_font.set_underline(True)
-        week_header_text = event_font.render("WEEK VIEW", True, white)
+        week_header_text = event_font.render(info_dict['week_header'], True, white)
         event_font.set_underline(False)
         window.blit(week_header_text, (4.95 * w // 8, (1 * h // 8)))
 
@@ -129,7 +127,7 @@ def display():
             bottom_of_week_events = (1.1 * h // 8) + (line+1)*event_font.get_linesize()
 
         event_font.set_underline(True)
-        upcoming_header_text = event_font.render("COMING UP", True, white)
+        upcoming_header_text = event_font.render(info_dict['future_header'], True, white)
         event_font.set_underline(False)
         window.blit(upcoming_header_text, (4.95 * w // 8, (bottom_of_week_events + h // 8)))
 
@@ -147,10 +145,10 @@ def display():
     pg.quit()
 
 
-def what_data(date_str):
+def what_data(date_str, ss_id):
     # The ID and range of a sample spreadsheet.
-    spreadsheet_id = '1aXGSYveChtyNhKcAhia9CTPUJ4Nsqq0jbhbMe6hEJqA'
-    sheet_range = 'the input calendar!A3:F'
+    spreadsheet_id = ss_id
+    sheet_range = 'A1:F'
 
     sheet_reader = SheetReader(spreadsheet_id, sheet_range)
     values = sheet_reader.download_data()
@@ -158,8 +156,17 @@ def what_data(date_str):
         print('No data found.')
 
     ret_struct = {'date': date_str}
-    ret_struct['week_events'] = []
+    try:
+        ret_struct['week_header'] = values[0][2]
+    except IndexError:
+        ret_struct['week_header'] = "WEEK VIEW"
 
+    try:
+        ret_struct['future_header'] = values[0][3]
+    except IndexError:
+        ret_struct['week_header'] = "COMING UP"
+
+    ret_struct['week_events'] = []
     todays_index = None
     for i in range(len(values)):
         try:
@@ -213,6 +220,7 @@ def what_data(date_str):
 
 
 def test_display(): #####################
+    import pygame
     successes, failures = pygame.init()
     print("{0} successes and {1} failures".format(successes, failures))
 
