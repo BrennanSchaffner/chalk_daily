@@ -26,7 +26,6 @@ def get_sheet_url():
 
 
 def display():
-    print('breakpoint ??')
     pg.init()
     window = pg.display.set_mode((0, 0), pg.FULLSCREEN)
 
@@ -76,6 +75,7 @@ def display():
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     done = True
+        print('breakpoint ??')
 
         # create a text surface object,
         # on which text is drawn on it.
