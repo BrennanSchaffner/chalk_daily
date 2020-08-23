@@ -27,59 +27,59 @@ def get_sheet_url():
 
 def display():
     print('breakpoint ??')
-    # pg.init()
-    # window = pg.display.set_mode((0, 0), pg.FULLSCREEN)
-    #
-    # # create a font object.
-    # # 1st parameter is the font file
-    # # which is present in pygame.
-    # # 2nd parameter is size of the font
-    # if os.path.isfile('/home/pi/chalk_daily/chawp.ttf'):
-    #     date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 32)
-    #     quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 50)
-    #     event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 28)
-    # else: ###############################
-    #     date_font = pg.font.Font(r'.\chawp.ttf', 32)
-    #     quote_font = pg.font.Font(r'.\chawp.ttf', 50)
-    #     event_font = pg.font.Font(r'.\chawp.ttf', 28)
-    #
-    #
-    # # set the pygame window name
-    # pg.display.set_caption('Chalk Daily')
-    #
-    # # create a surface object, image is drawn on it.
-    # if os.path.isfile('/home/pi/chalk_daily/green_chalkboard.jpg'):
-    #     chalkboard = pg.image.load(r'/home/pi/chalk_daily/green_chalkboard.jpg')
-    # else: #############################
-    #     chalkboard = pg.image.load(r'.\green_chalkboard.jpg')
-    #
-    #
-    # # copying the image surface object
-    # # to the display surface object at
-    # # (0, 0) coordinate.
-    # window.blit(chalkboard, (0, 0))
-    #
-    # white = (255, 255, 255)
-    #
-    # done = False
-    # while not done:
-    #     today = date.today()
-    #     day_name = calendar.day_name[today.weekday()]
-    #     date_str = day_name + ", " + today.strftime("%B %d, %Y")
-    #
-    #     window.blit(chalkboard, (0, 0))
-    #
-    #     for event in pg.event.get():
-    #         if event.type == pg.QUIT:
-    #             done = True
-    #
-    #         if event.type == pg.KEYDOWN:
-    #             if event.key == pg.K_ESCAPE:
-    #                 done = True
-    #
-    #     # create a text surface object,
-    #     # on which text is drawn on it.
-    #     date_text = date_font.render(date_str, True, white)
+    pg.init()
+    window = pg.display.set_mode((0, 0), pg.FULLSCREEN)
+
+    # create a font object.
+    # 1st parameter is the font file
+    # which is present in pygame.
+    # 2nd parameter is size of the font
+    if os.path.isfile('/home/pi/chalk_daily/chawp.ttf'):
+        date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 32)
+        quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 50)
+        event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 28)
+    else: ###############################
+        date_font = pg.font.Font(r'.\chawp.ttf', 32)
+        quote_font = pg.font.Font(r'.\chawp.ttf', 50)
+        event_font = pg.font.Font(r'.\chawp.ttf', 28)
+
+
+    # set the pygame window name
+    pg.display.set_caption('Chalk Daily')
+
+    # create a surface object, image is drawn on it.
+    if os.path.isfile('/home/pi/chalk_daily/green_chalkboard.jpg'):
+        chalkboard = pg.image.load(r'/home/pi/chalk_daily/green_chalkboard.jpg')
+    else: #############################
+        chalkboard = pg.image.load(r'.\green_chalkboard.jpg')
+
+
+    # copying the image surface object
+    # to the display surface object at
+    # (0, 0) coordinate.
+    window.blit(chalkboard, (0, 0))
+
+    white = (255, 255, 255)
+
+    done = False
+    while not done:
+        today = date.today()
+        day_name = calendar.day_name[today.weekday()]
+        date_str = day_name + ", " + today.strftime("%B %d, %Y")
+
+        window.blit(chalkboard, (0, 0))
+
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                done = True
+
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                    done = True
+
+        # create a text surface object,
+        # on which text is drawn on it.
+        date_text = date_font.render(date_str, True, white)
     #
     #     # create a rectangular object for the
     #     # text surface object
