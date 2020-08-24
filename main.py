@@ -17,6 +17,7 @@ import os.path
 
 def main():
     ss_id = get_sheet_url()
+    if ss_id:
         display(ss_id)
     else:
         easygui.msgbox('I don\'t like that link for some reason - Brennan', 'The first shot does not beat you. - Chuck Daily')
