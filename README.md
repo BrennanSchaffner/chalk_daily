@@ -23,7 +23,8 @@ in terminal:
 
 ## Start it
 * Run the Chalk Daily desktop shortcut (may load for a few seconds)
-* give it the link to your google sheet formatted like [this](./example_spreadsheet.jpg)
+* Press Execute
+* Give it the link to your google sheet formatted like [this](./example_spreadsheet.jpg)
 * The first time, you will have to verify this application
 ** press advanced
 ** Go to Quickstart (considered unsafe because google does not know me)
