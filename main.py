@@ -11,11 +11,12 @@ import easygui
 import sys
 import os.path
 
-# this means debug lines that run on my windows laptop#######################################
+# this means debug lines that run on my windows laptop ->#######################################
+# TODO: Rethink dates
 
 
 def main():
-    ss_id, sheet_id = get_sheet_url()
+    ss_id = get_sheet_url()
     display(ss_id)
     # test_display()
 
@@ -23,11 +24,11 @@ def main():
 def get_sheet_url():
     url = easygui.enterbox("Your Google sheet URL")
     after_d = url.split('/d/')[1]
-    spreadsheet_id = after_d.split('/edit#gid=')[0]
-    sheet_id = after_d.split('/edit#gid=')[1]
+    spreadsheet_id = after_d.split('/edit')[0]
+    # sheet_id = after_d.split('/edit#gid=')[1]
     if url == '' or url is None:
         sys.exit()
-    return spreadsheet_id, sheet_id
+    return spreadsheet_id
 
 
 def display(ss_id):
