@@ -13,22 +13,23 @@ in terminal:
 * make sure you are in home/pi with 'pwd' (use 'cd /home/pi' if you are not)
 * 'sh ./chalk_daily/setup.sh'
 * At one point, you may be asked to enable the google sheets api and sign into google. 
-** Press 'Enable the Google Sheets API'
-** Enter new project name: 'Chalk Daily' and press next
-** Select 'Desktop app' and Create
-** Download client configuration. Then move credentials.json from downloads into /home/pi/ using the file explorer
-	(If your credentials change for some reason, (maybe you switched google accounts) then delete your old credentials.json and redownload)
-** Close the browser window
+	* Press 'Enable the Google Sheets API'
+	* Enter new project name: 'Chalk Daily' and press next
+	* Select 'Desktop app' and Create
+	* Download client configuration. Then move credentials.json from downloads into /home/pi/ using the file explorer
+		* (If your credentials change for some reason, (maybe you switched google accounts) then delete your old credentials.json and redownload)
+	* Close the browser window
 * Copy the Chalk Daily desktop shortcut to your desktop (or where ever you want it)
 
 ## Start it
 * Run the Chalk Daily desktop shortcut (may load for a few seconds)
 * Press Execute
+	* If you dont want to do this every time, you can check the box in File Manager>Edit>Preferences>General>Don't ask options on launch executable file
 * Give it the link to your google sheet formatted like [this](./example_spreadsheet.jpg)
 * The first time, you will have to verify this application
-** press advanced
-** Go to Quickstart (considered unsafe because google does not know me)
-** Allow, Allow
+	* press advanced
+	* Go to Quickstart (considered unsafe because google does not know me)
+	* Allow, Allow
 * A token is saved so in the future it will just run without verification
 
 To close, press esc and wait a few seconds. 
