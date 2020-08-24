@@ -56,9 +56,9 @@ def display(ss_id):
         quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 50)
         event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 28)
     else: ###############################
-        date_font = pg.font.Font(r'.\chawp.ttf', 32)
+        date_font = pg.font.Font(r'.\chawp.ttf', 40)
         quote_font = pg.font.Font(r'.\chawp.ttf', 50)
-        event_font = pg.font.Font(r'.\chawp.ttf', 28)
+        event_font = pg.font.Font(r'.\chawp.ttf', 34)
 
     # set the pygame window name
     pg.display.set_caption('Chalk Daily')
@@ -130,25 +130,25 @@ def display(ss_id):
             event_font.set_underline(True)
             week_header_text = event_font.render(info_dict['week_header'], True, white)
             event_font.set_underline(False)
-            window.blit(week_header_text, (4.95 * w // 8, (1 * h // 8)))
+            window.blit(week_header_text, (5.7 * w // 8, (1 * h // 8)))
 
             week_view_text = []
             for line in info_dict['week_events']:
                 week_view_text.append(event_font.render(line, True, white))
             for line in range(len(week_view_text)):
-                window.blit(week_view_text[line], (4.5 * w // 8, (1.1 * h // 8) + (line+1)*event_font.get_linesize()))
+                window.blit(week_view_text[line], (5.25 * w // 8, (1.1 * h // 8) + (line+1)*(event_font.get_linesize() + 0.1//8)))
                 bottom_of_week_events = (1.1 * h // 8) + (line+1)*event_font.get_linesize()
 
             event_font.set_underline(True)
             upcoming_header_text = event_font.render(info_dict['future_header'], True, white)
             event_font.set_underline(False)
-            window.blit(upcoming_header_text, (4.95 * w // 8, (bottom_of_week_events + h // 8)))
+            window.blit(upcoming_header_text, (5.7 * w // 8, (bottom_of_week_events + h // 8)))
 
             upcoming_view_text = []
             for line in info_dict['important_events']:
                 upcoming_view_text.append(event_font.render(line, True, white))
             for line in range(len(upcoming_view_text)):
-                window.blit(upcoming_view_text[line], (4.5 * w // 8, (bottom_of_week_events + (1.1*h // 8) + (line+1)*event_font.get_linesize())))
+                window.blit(upcoming_view_text[line], (5.25 * w // 8, (bottom_of_week_events + (1.1*h // 8) + (line+1)*(event_font.get_linesize() + 0.1//8))))
         else:
             quote_text = quote_font.render("I couldn't find today in your sheet", True, white)
             quote_rect = quote_text.get_rect()
