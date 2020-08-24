@@ -47,5 +47,6 @@ class SheetReader(object):
         sheet = service.spreadsheets()
         result = sheet.values().get(spreadsheetId=self.spreadsheet_id, range=self.sheet_range).execute()
         values = result.get('values', [])
+        print(values)
 
         return values
