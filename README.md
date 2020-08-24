@@ -26,6 +26,8 @@ in terminal:
 * Press Execute
 	* If you dont want to do this every time, you can check the box in File Manager>Edit>Preferences>General>Don't ask options on launch executable file
 * Give it the link to your google sheet formatted like [this](./example_spreadsheet.jpg)
+	* I saved the link locally in a text file on the desktop so I didn't have to open a browser every time
+	* Maybe someday I'll implement a 'recently used link'
 * The first time, you will have to verify this application
 	* press advanced
 	* Go to Quickstart (considered unsafe because google does not know me)
