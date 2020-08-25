@@ -116,14 +116,11 @@ def display(ss_id):
         date_rect.bottomleft = (w // 8, 7 * h // 8)
 
         window.blit(date_text, date_rect)
-        internet = True
-        internet = internet_connected()
-        try:
-            info_dict = what_data(date_str, date_str_no_year, ss_id)
-        except:
-            internet = False
+        internet_connected()
 
-        if internet:
+        info_dict = what_data(date_str, date_str_no_year, ss_id)
+
+        if internet_connected() and info_dict is not "failed":
             if info_dict:
                 if info_dict['quote'] == '':
                     info_dict['quote'] = 'Quotes from people you respect! - Brennan'

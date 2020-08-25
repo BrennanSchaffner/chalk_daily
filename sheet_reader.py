@@ -49,6 +49,6 @@ class SheetReader(object):
             result = sheet.values().get(spreadsheetId=self.spreadsheet_id, range=self.sheet_range).execute()
             values = result.get('values', [])
         except:
-            pass  # for now
+            return "failed"
 
         return values
