@@ -10,6 +10,7 @@ import easygui
 import sys
 import os.path
 import urllib
+import platform
 
 from sheet_reader import SheetReader
 
@@ -29,7 +30,10 @@ def main():
 
 def internet_connected(host='http://google.com'):
     try:
-        urllib.request.urlopen(host) #Python 3.x
+        if sys.version_info.major == 3:
+            urllib.request.urlopen(host)  # Python 3.x
+        else:
+            urllib.urlopen(host) #Python 3.x
         return True
     except:
         return False
@@ -119,7 +123,6 @@ def display(ss_id):
         internet_connected()
 
         info_dict = what_data(date_str, date_str_no_year, ss_id)
-
         if internet_connected() and info_dict is not "failed":
             if info_dict:
                 if info_dict['quote'] == '':
