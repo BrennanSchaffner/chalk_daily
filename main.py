@@ -9,7 +9,7 @@ import pygame as pg
 import easygui
 import sys
 import os.path
-import urllib.request
+import urllib
 
 from sheet_reader import SheetReader
 
