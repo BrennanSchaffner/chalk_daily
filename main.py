@@ -3,13 +3,15 @@
 
 # make desktop icon: https://www.hackster.io/kamal-khan/desktop-shortcut-for-python-script-on-raspberry-pi-fd1c63
 
-from sheet_reader import SheetReader
 from datetime import date
 import calendar
 import pygame as pg
 import easygui
 import sys
 import os.path
+import urllib.request
+
+from sheet_reader import SheetReader
 
 # this means debug lines that run on my windows laptop ->#######################################
 # TODO: Rethink dates
@@ -23,6 +25,14 @@ def main():
         easygui.msgbox('I don\'t like that link for some reason - Brennan', 'The first shot does not beat you. - Chuck Daily')
         sys.exit()
     # test_display()
+
+
+def internet_connected(host='http://google.com'):
+    try:
+        urllib.request.urlopen(host) #Python 3.x
+        return True
+    except:
+        return False
 
 
 def get_sheet_url():
@@ -106,57 +116,72 @@ def display(ss_id):
         date_rect.bottomleft = (w // 8, 7 * h // 8)
 
         window.blit(date_text, date_rect)
+        internet = True
+        internet = internet_connected()
+        try:
+            info_dict = what_data(date_str, date_str_no_year, ss_id)
+        except:
+            internet = False
 
-        info_dict = what_data(date_str, date_str_no_year, ss_id)
-        if info_dict:
-            if info_dict['quote'] == '':
-                info_dict['quote'] = 'Quotes from people you respect! - Brennan'
-            if len(info_dict['quote']) <= 26:
-                quote_text = quote_font.render(info_dict['quote'], True, white)
+        if internet:
+            if info_dict:
+                if info_dict['quote'] == '':
+                    info_dict['quote'] = 'Quotes from people you respect! - Brennan'
+                if len(info_dict['quote']) <= 26:
+                    quote_text = quote_font.render(info_dict['quote'], True, white)
+                    quote_rect = quote_text.get_rect()
+                    quote_rect.midleft = (w // 8, h // 2)
+                    window.blit(quote_text, quote_rect)
+                else:
+                    quote_str = info_dict['quote']
+                    quote_text = []
+                    while len(quote_str) > 26:
+                        last_space = quote_str.rfind(' ', 0, 26)
+                        quote_text.append((quote_font.render(quote_str[:last_space], True, white)))
+                        quote_str = quote_str[last_space:]
+                    quote_text.append(quote_font.render(quote_str, True, white))
+                    for line in range(len(quote_text)):
+                        window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
+
+                event_font.set_underline(True)
+                week_header_text = event_font.render(info_dict['week_header'], True, white)
+                event_font.set_underline(False)
+                window.blit(week_header_text, (5.7 * w // 8, (1 * h // 8)))
+
+                week_view_text = []
+                for line in info_dict['week_events']:
+                    week_view_text.append(event_font.render(line, True, white))
+                for line in range(len(week_view_text)):
+                    window.blit(week_view_text[line], (5.25 * w // 8, (1.1 * h // 8) + (line+1)*(event_font.get_linesize() + 0.1//8)))
+                    bottom_of_week_events = (1.1 * h // 8) + (line+1)*event_font.get_linesize()
+
+                event_font.set_underline(True)
+                upcoming_header_text = event_font.render(info_dict['future_header'], True, white)
+                event_font.set_underline(False)
+                window.blit(upcoming_header_text, (5.7 * w // 8, (bottom_of_week_events + h // 8)))
+
+                upcoming_view_text = []
+                for line in info_dict['important_events']:
+                    upcoming_view_text.append(event_font.render(line, True, white))
+                for line in range(len(upcoming_view_text)):
+                    window.blit(upcoming_view_text[line], (5.25 * w // 8, (bottom_of_week_events + (1.1*h // 8) + (line+1)*(event_font.get_linesize() + 0.1//8))))
+            else:
+                quote_text = quote_font.render("I couldn't find today in your sheet", True, white)
                 quote_rect = quote_text.get_rect()
                 quote_rect.midleft = (w // 8, h // 2)
                 window.blit(quote_text, quote_rect)
-            else:
-                quote_str = info_dict['quote']
-                quote_text = []
-                while len(quote_str) > 26:
-                    last_space = quote_str.rfind(' ', 0, 26)
-                    quote_text.append((quote_font.render(quote_str[:last_space], True, white)))
-                    quote_str = quote_str[last_space:]
-                quote_text.append(quote_font.render(quote_str, True, white))
-                for line in range(len(quote_text)):
-                    window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
-
-            event_font.set_underline(True)
-            week_header_text = event_font.render(info_dict['week_header'], True, white)
-            event_font.set_underline(False)
-            window.blit(week_header_text, (5.7 * w // 8, (1 * h // 8)))
-
-            week_view_text = []
-            for line in info_dict['week_events']:
-                week_view_text.append(event_font.render(line, True, white))
-            for line in range(len(week_view_text)):
-                window.blit(week_view_text[line], (5.25 * w // 8, (1.1 * h // 8) + (line+1)*(event_font.get_linesize() + 0.1//8)))
-                bottom_of_week_events = (1.1 * h // 8) + (line+1)*event_font.get_linesize()
-
-            event_font.set_underline(True)
-            upcoming_header_text = event_font.render(info_dict['future_header'], True, white)
-            event_font.set_underline(False)
-            window.blit(upcoming_header_text, (5.7 * w // 8, (bottom_of_week_events + h // 8)))
-
-            upcoming_view_text = []
-            for line in info_dict['important_events']:
-                upcoming_view_text.append(event_font.render(line, True, white))
-            for line in range(len(upcoming_view_text)):
-                window.blit(upcoming_view_text[line], (5.25 * w // 8, (bottom_of_week_events + (1.1*h // 8) + (line+1)*(event_font.get_linesize() + 0.1//8))))
+                quote_text = quote_font.render("- Brennan", True, white)
+                quote_rect = quote_text.get_rect()
+                quote_rect.midleft = (w // 8, h // 2 + quote_font.get_linesize() + 1//8)
+                window.blit(quote_text, quote_rect)
         else:
-            quote_text = quote_font.render("I couldn't find today in your sheet", True, white)
+            quote_text = quote_font.render("If I were connected to the internet,", True, white)
             quote_rect = quote_text.get_rect()
             quote_rect.midleft = (w // 8, h // 2)
             window.blit(quote_text, quote_rect)
-            quote_text = quote_font.render("- Brennan", True, white)
+            quote_text = quote_font.render("there would be a cool quote here.", True, white)
             quote_rect = quote_text.get_rect()
-            quote_rect.midleft = (w // 8, h // 2 + quote_font.get_linesize() + 1//8)
+            quote_rect.midleft = (w // 8, h // 2 + quote_font.get_linesize() + 1 // 8)
             window.blit(quote_text, quote_rect)
 
         pg.display.flip()
