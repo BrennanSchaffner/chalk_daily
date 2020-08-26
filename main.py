@@ -186,6 +186,7 @@ def display(ss_id):
         pg.display.flip()
         if not done:
             pg.time.wait(10)  # ms
+        print("########################")
         print("info dict: ", info_dict)
         print("internet: ", internet)
         print("date: ", date_str)
@@ -202,7 +203,12 @@ def what_data(date_str, date_str_no_year, ss_id):
     sheet_range = 'A1:F'
 
     sheet_reader = SheetReader(spreadsheet_id, sheet_range)
-    values = sheet_reader.download_data()
+    try:
+        values = sheet_reader.download_data()
+    except:
+        return "failed"
+
+    
     if not values:
         print('No data found.')
 
