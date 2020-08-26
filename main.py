@@ -182,6 +182,11 @@ def display(ss_id):
             quote_rect = quote_text.get_rect()
             quote_rect.midleft = (w // 8, h // 2 + quote_font.get_linesize() + 1 // 8)
             window.blit(quote_text, quote_rect)
+            if info_dict is "failed":
+                quote_text = quote_font.render("Connect to the internet, and restart the program.", True, white)
+                quote_rect = quote_text.get_rect()
+                quote_rect.midleft = (w // 8, h // 2 + (quote_font.get_linesize() + 1 // 8) * 2)
+                window.blit(quote_text, quote_rect)
 
         pg.display.flip()
         if not done:
@@ -208,7 +213,7 @@ def what_data(date_str, date_str_no_year, ss_id):
     except:
         return "failed"
 
-    
+
     if not values:
         print('No data found.')
 
