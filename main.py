@@ -32,7 +32,7 @@ def internet_connected(host='http://google.com'):
         if sys.version_info.major == 3:
             urllib.request.urlopen(host)  # Python 3.x
         else:
-            urllib.urlopen(host) #Python 3.x
+            urllib.urlopen(host)
         return True
     except:
         return False
@@ -119,10 +119,10 @@ def display(ss_id):
         date_rect.bottomleft = (w // 8, 7 * h // 8)
 
         window.blit(date_text, date_rect)
-        internet_connected()
+        internet = internet_connected()
 
         info_dict = what_data(date_str, date_str_no_year, ss_id)
-        if internet_connected() and info_dict is not "failed":
+        if internet and info_dict is not "failed":
             if info_dict:
                 if info_dict['quote'] == '':
                     info_dict['quote'] = 'Quotes from people you respect! - Brennan'
@@ -186,7 +186,12 @@ def display(ss_id):
         pg.display.flip()
         if not done:
             pg.time.wait(10)  # ms
-
+        print("info dict: ", info_dict)
+        print("internet: ", internet)
+        print("date: ", date_str)
+        print("sheet: ", ss_id)
+        print("done? ", done)
+        
     pg.display.quit()
     pg.quit()
 
