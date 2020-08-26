@@ -41,10 +41,10 @@ class SheetReader(object):
             else:
                 with open('token.pickle', 'wb') as token:
                     pickle.dump(creds, token)
-        service = build('sheets', 'v4', credentials=creds)
 
         # Call the Sheets API
         try:
+            service = build('sheets', 'v4', credentials=creds)
             sheet = service.spreadsheets()
             result = sheet.values().get(spreadsheetId=self.spreadsheet_id, range=self.sheet_range).execute()
             values = result.get('values', [])

@@ -191,7 +191,7 @@ def display(ss_id):
         print("date: ", date_str)
         print("sheet: ", ss_id)
         print("done? ", done)
-        
+
     pg.display.quit()
     pg.quit()
 
