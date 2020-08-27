@@ -151,9 +151,10 @@ def display(ss_id):
                 for line in info_dict['week_events']:
                     week_view_text.append(event_font.render(line, True, white))
 
-                text_height = (1.1 * h // 8) + (event_font.get_linesize() + 0.1//8)
+                text_height = (1 * h // 8) + (event_font.get_linesize() + 0.1//8)
                 for line in range(len(week_view_text)):
                     if info_dict['week_events'][line][0] is chr(27):
+                        print("found an ESC")
                         text_height += (event_font.get_linesize() + 0.2//8)
                     else:
                         text_height += (event_font.get_linesize() + 0.1//8)
