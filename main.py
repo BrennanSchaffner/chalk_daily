@@ -142,7 +142,7 @@ def display(ss_id):
                     for line in range(len(quote_text)):
                         window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
 
-                text_height = 1 * h // 8
+                text_height = 0.5 * h // 8
                 event_font.set_underline(True)
                 week_header_text = event_font.render(info_dict['week_header'], True, white)
                 event_font.set_underline(False)
@@ -163,7 +163,7 @@ def display(ss_id):
                 event_font.set_underline(True)
                 upcoming_header_text = event_font.render(info_dict['future_header'], True, white)
                 event_font.set_underline(False)
-                window.blit(upcoming_header_text, (5.7 * w // 8, (bottom_of_week_events + h // 8)))
+                window.blit(upcoming_header_text, (5.7 * w // 8, (bottom_of_week_events + 0.5*h // 8)))
 
                 upcoming_view_text = []
                 for line in info_dict['important_events']:
