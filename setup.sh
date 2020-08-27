@@ -13,6 +13,7 @@ git clone https://github.com/BrennanSchaffner/chalk_daily.git
 
 cd ./chalk_daily
 git pull
+sudo iw dev wlan0 set power_save off
 
 pip install easygui
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
