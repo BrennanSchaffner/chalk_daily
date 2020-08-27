@@ -205,7 +205,7 @@ def display(ss_id):
             #pg.time.wait(1000*60*5)  # ms
             pg.time.wait(10)
         # print("########################")
-        print("info dict: ", info_dict)
+        # print("info dict: ", info_dict)
         # print("internet: ", internet)
         # print("date: ", date_str)
         # print("sheet: ", ss_id)
