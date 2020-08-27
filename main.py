@@ -65,9 +65,9 @@ def display(ss_id):
     # which is present in pygame.
     # 2nd parameter is size of the font
     if os.path.isfile('/home/pi/chalk_daily/chawp.ttf'):
-        date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 32)
-        quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 50)
-        event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 28)
+        date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 40)
+        quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 63)
+        event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 35)
     else: ###############################
         date_font = pg.font.Font(r'.\chawp.ttf', 40)
         quote_font = pg.font.Font(r'.\chawp.ttf', 50)
@@ -150,9 +150,15 @@ def display(ss_id):
                 week_view_text = []
                 for line in info_dict['week_events']:
                     week_view_text.append(event_font.render(line, True, white))
+
+                text_height = (1.1 * h // 8) + (event_font.get_linesize() + 0.1//8)
                 for line in range(len(week_view_text)):
-                    window.blit(week_view_text[line], (5.25 * w // 8, (1.1 * h // 8) + (line+1)*(event_font.get_linesize() + 0.1//8)))
-                    bottom_of_week_events = (1.1 * h // 8) + (line+1)*event_font.get_linesize()
+                    if week_view_text[line][0] is chr(27):
+                        text_height += (event_font.get_linesize() + 0.5//8)
+                    else:
+                        text_height += (event_font.get_linesize() + 0.1//8)
+                    window.blit(week_view_text[line], (5.25 * w // 8, text_height))
+                    bottom_of_week_events = text_height
 
                 event_font.set_underline(True)
                 upcoming_header_text = event_font.render(info_dict['future_header'], True, white)
