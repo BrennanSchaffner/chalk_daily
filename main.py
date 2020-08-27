@@ -142,22 +142,21 @@ def display(ss_id):
                     for line in range(len(quote_text)):
                         window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
 
+                text_height = 1 * h // 8
                 event_font.set_underline(True)
                 week_header_text = event_font.render(info_dict['week_header'], True, white)
                 event_font.set_underline(False)
-                window.blit(week_header_text, (5.7 * w // 8, (1 * h // 8)))
+                window.blit(week_header_text, (5.7 * w // 8, text_height))
 
                 week_view_text = []
                 for line in info_dict['week_events']:
                     week_view_text.append(event_font.render(line, True, white))
 
-                text_height = (1 * h // 8) + (event_font.get_linesize() + 0.1//8)
                 for line in range(len(week_view_text)):
-                    if info_dict['week_events'][line][0] is chr(27):
-                        print("found an ESC")
-                        text_height += (event_font.get_linesize() + 0.2//8)
+                    if info_dict['week_events'][line].startswith(str(chr(27))):
+                        text_height += (event_font.get_linesize() + 12)
                     else:
-                        text_height += (event_font.get_linesize() + 0.1//8)
+                        text_height += (event_font.get_linesize() + 0.1/8)
                     window.blit(week_view_text[line], (5.25 * w // 8, text_height))
                     bottom_of_week_events = text_height
 
