@@ -153,7 +153,7 @@ def display(ss_id):
 
                 text_height = (1.1 * h // 8) + (event_font.get_linesize() + 0.1//8)
                 for line in range(len(week_view_text)):
-                    if week_view_text[line][0] is chr(27):
+                    if info_dict['week_events'][line][0] is chr(27):
                         text_height += (event_font.get_linesize() + 0.5//8)
                     else:
                         text_height += (event_font.get_linesize() + 0.1//8)
