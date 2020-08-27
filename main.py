@@ -158,18 +158,22 @@ def display(ss_id):
                     else:
                         text_height += (event_font.get_linesize() + 0.1/8)
                     window.blit(week_view_text[line], (5.25 * w // 8, text_height))
-                    bottom_of_week_events = text_height
 
                 event_font.set_underline(True)
                 upcoming_header_text = event_font.render(info_dict['future_header'], True, white)
                 event_font.set_underline(False)
-                window.blit(upcoming_header_text, (5.7 * w // 8, (bottom_of_week_events + 0.5*h // 8)))
+                text_height += 0.5*h // 8
+                window.blit(upcoming_header_text, (5.7 * w // 8, text_height))
 
                 upcoming_view_text = []
                 for line in info_dict['important_events']:
                     upcoming_view_text.append(event_font.render(line, True, white))
                 for line in range(len(upcoming_view_text)):
-                    window.blit(upcoming_view_text[line], (5.25 * w // 8, (bottom_of_week_events + (1.1*h // 8) + (line+1)*(event_font.get_linesize() + 0.1//8))))
+                    if line is 0:
+                       text_height += (event_font.get_linesize() + 12)
+                    else:
+                        text_height += (event_font.get_linesize() + 0.1 / 8)
+                    window.blit(upcoming_view_text[line], (5.25 * w // 8, text_height))
             else:
                 quote_text = quote_font.render("I couldn't find today in your sheet", True, white)
                 quote_rect = quote_text.get_rect()
