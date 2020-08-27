@@ -154,7 +154,7 @@ def display(ss_id):
                 text_height = (1.1 * h // 8) + (event_font.get_linesize() + 0.1//8)
                 for line in range(len(week_view_text)):
                     if info_dict['week_events'][line][0] is chr(27):
-                        text_height += (event_font.get_linesize() + 0.5//8)
+                        text_height += (event_font.get_linesize() + 0.2//8)
                     else:
                         text_height += (event_font.get_linesize() + 0.1//8)
                     window.blit(week_view_text[line], (5.25 * w // 8, text_height))
@@ -199,7 +199,7 @@ def display(ss_id):
             #pg.time.wait(1000*60*5)  # ms
             pg.time.wait(10)
         # print("########################")
-        # print("info dict: ", info_dict)
+        print("info dict: ", info_dict)
         # print("internet: ", internet)
         # print("date: ", date_str)
         # print("sheet: ", ss_id)
