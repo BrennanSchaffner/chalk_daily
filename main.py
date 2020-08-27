@@ -142,11 +142,13 @@ def display(ss_id):
                     for line in range(len(quote_text)):
                         window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
 
+                text_x = 4.8 * w // 8
+                text_x_indented = text_x + .45 * w // 8
                 text_height = 0.5 * h // 8
                 event_font.set_underline(True)
                 week_header_text = event_font.render(info_dict['week_header'], True, white)
                 event_font.set_underline(False)
-                window.blit(week_header_text, (5.7 * w // 8, text_height))
+                window.blit(week_header_text, (text_x_indented, text_height))
 
                 week_view_text = []
                 for line in info_dict['week_events']:
@@ -157,13 +159,13 @@ def display(ss_id):
                         text_height += (event_font.get_linesize() + 12)
                     else:
                         text_height += (event_font.get_linesize() + 0.1/8)
-                    window.blit(week_view_text[line], (5.25 * w // 8, text_height))
+                    window.blit(week_view_text[line], (text_x, text_height))
 
                 event_font.set_underline(True)
                 upcoming_header_text = event_font.render(info_dict['future_header'], True, white)
                 event_font.set_underline(False)
                 text_height += 0.5*h // 8
-                window.blit(upcoming_header_text, (5.7 * w // 8, text_height))
+                window.blit(upcoming_header_text, (text_x_indented, text_height))
 
                 upcoming_view_text = []
                 for line in info_dict['important_events']:
@@ -173,7 +175,7 @@ def display(ss_id):
                        text_height += (event_font.get_linesize() + 12)
                     else:
                         text_height += (event_font.get_linesize() + 0.1 / 8)
-                    window.blit(upcoming_view_text[line], (5.25 * w // 8, text_height))
+                    window.blit(upcoming_view_text[line], (text_x, text_height))
             else:
                 quote_text = quote_font.render("I couldn't find today in your sheet", True, white)
                 quote_rect = quote_text.get_rect()
