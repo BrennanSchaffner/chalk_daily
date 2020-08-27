@@ -190,13 +190,13 @@ def display(ss_id):
 
         pg.display.flip()
         if not done:
-            pg.time.wait(10)  # ms
-        print("########################")
-        print("info dict: ", info_dict)
-        print("internet: ", internet)
-        print("date: ", date_str)
-        print("sheet: ", ss_id)
-        print("done? ", done)
+            pg.time.wait(1000*60*5)  # ms
+        # print("########################")
+        # print("info dict: ", info_dict)
+        # print("internet: ", internet)
+        # print("date: ", date_str)
+        # print("sheet: ", ss_id)
+        # print("done? ", done)
 
     pg.display.quit()
     pg.quit()
