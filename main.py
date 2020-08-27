@@ -250,7 +250,7 @@ def what_data(date_str, date_str_no_year, ss_id):
                 except IndexError:
                     values[i+d][0] = 'TBD,TBD'
 
-                ret_struct['week_events'].append(values[i+d][0][:3].upper() + ': ')
+                ret_struct['week_events'].append(chr(27) + values[i+d][0][:3].upper() + ': ')
                 first_event_in_day = True
                 if len(values[i+d]) > 2 and values[i+d][2] != '':
                     ret_struct['week_events'][len(ret_struct['week_events'])-1] += (values[i+d][2])
