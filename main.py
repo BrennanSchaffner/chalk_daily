@@ -68,6 +68,7 @@ def display(ss_id):
         date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 40)
         quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 63)
         event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 35)
+        error_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 20)
     else: ###############################
         date_font = pg.font.Font(r'.\chawp.ttf', 40)
         quote_font = pg.font.Font(r'.\chawp.ttf', 50)
@@ -124,7 +125,7 @@ def display(ss_id):
         info_dict = what_data(date_str, date_str_no_year, ss_id)
         if internet and info_dict is not "failed":
             if info_dict:
-                quote_max_chars = 22
+                quote_max_chars = 24
                 if info_dict['quote'] == '':
                     info_dict['quote'] = 'Quotes from people you respect! - Brennan'
                 if len(info_dict['quote']) <= quote_max_chars:
@@ -143,6 +144,7 @@ def display(ss_id):
                     for line in range(len(quote_text)):
                         window.blit(quote_text[line], (w // 9, (h // 5) + line*quote_font.get_linesize()))
 
+                ### EVENTS
                 text_x = 4.8 * w // 8
                 text_x_indented = text_x + .45 * w // 8
                 text_height = 0.5 * h // 8
@@ -178,25 +180,25 @@ def display(ss_id):
                         text_height += (event_font.get_linesize() + 0.1 / 8)
                     window.blit(upcoming_view_text[line], (text_x, text_height))
             else:
-                quote_text = quote_font.render("I couldn't find today in your sheet", True, white)
+                quote_text = error_font.render("I couldn't find today in your sheet", True, white)
                 quote_rect = quote_text.get_rect()
                 quote_rect.midleft = (w // 8, h // 2)
                 window.blit(quote_text, quote_rect)
-                quote_text = quote_font.render("- Brennan", True, white)
+                quote_text = error_font.render("- Brennan", True, white)
                 quote_rect = quote_text.get_rect()
                 quote_rect.midleft = (w // 8, h // 2 + quote_font.get_linesize() + 1//8)
                 window.blit(quote_text, quote_rect)
         else:
-            quote_text = quote_font.render("If I were connected to the internet,", True, white)
+            quote_text = error_font.render("If I were connected to the internet,", True, white)
             quote_rect = quote_text.get_rect()
             quote_rect.midleft = (w // 8, h // 2)
             window.blit(quote_text, quote_rect)
-            quote_text = quote_font.render("there would be a cool quote here.", True, white)
+            quote_text = error_font.render("there would be a cool quote here.", True, white)
             quote_rect = quote_text.get_rect()
             quote_rect.midleft = (w // 8, h // 2 + quote_font.get_linesize() + 1 // 8)
             window.blit(quote_text, quote_rect)
             if info_dict is "failed":
-                quote_text = quote_font.render("Connect to the internet, and restart the program.", True, white)
+                quote_text = error_font.render("Connect to the internet, and restart the program.", True, white)
                 quote_rect = quote_text.get_rect()
                 quote_rect.midleft = (w // 8, h // 2 + (quote_font.get_linesize() + 1 // 8) * 2)
                 window.blit(quote_text, quote_rect)
