@@ -124,9 +124,10 @@ def display(ss_id):
         info_dict = what_data(date_str, date_str_no_year, ss_id)
         if internet and info_dict is not "failed":
             if info_dict:
+                quote_max_chars = 22
                 if info_dict['quote'] == '':
                     info_dict['quote'] = 'Quotes from people you respect! - Brennan'
-                if len(info_dict['quote']) <= 26:
+                if len(info_dict['quote']) <= quote_max_chars:
                     quote_text = quote_font.render(info_dict['quote'], True, white)
                     quote_rect = quote_text.get_rect()
                     quote_rect.midleft = (w // 8, h // 2)
@@ -134,13 +135,13 @@ def display(ss_id):
                 else:
                     quote_str = info_dict['quote']
                     quote_text = []
-                    while len(quote_str) > 26:
-                        last_space = quote_str.rfind(' ', 0, 26)
+                    while len(quote_str) > quote_max_chars:
+                        last_space = quote_str.rfind(' ', 0, quote_max_chars)
                         quote_text.append((quote_font.render(quote_str[:last_space], True, white)))
                         quote_str = quote_str[last_space:]
                     quote_text.append(quote_font.render(quote_str, True, white))
                     for line in range(len(quote_text)):
-                        window.blit(quote_text[line], (w // 8, (h // 3) + line*quote_font.get_linesize()))
+                        window.blit(quote_text[line], (w // 9, (h // 5) + line*quote_font.get_linesize()))
 
                 text_x = 4.8 * w // 8
                 text_x_indented = text_x + .45 * w // 8
