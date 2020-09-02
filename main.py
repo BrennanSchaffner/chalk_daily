@@ -94,8 +94,10 @@ def display(ss_id):
     while not done:
         today = date.today()
         day_name = calendar.day_name[today.weekday()]
-        date_str_no_year = day_name + ", " + today.strftime("%B %d")
+        day_of_month = today.strftime("%d").lstrip("0")
+        date_str_no_year = day_name + ", " + today.strftime("%B") + " " + day_of_month
         date_str = date_str_no_year + ", " + today.strftime("%Y")
+        print(date_str)
 
         window.blit(chalkboard, (0, 0))
 
