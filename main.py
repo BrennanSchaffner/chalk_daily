@@ -125,6 +125,7 @@ def display(ss_id):
         internet = internet_connected()
 
         info_dict = what_data(date_str, date_str_no_year, ss_id)
+        print(info_dict)
         if internet and info_dict is not "failed":
             if info_dict:
                 quote_max_chars = 24
