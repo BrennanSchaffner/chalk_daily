@@ -45,13 +45,13 @@ class SheetReader(object):
         # Call the Sheets API
         # try:
         service = build('sheets', 'v4', credentials=creds)
-        print(service)
+        print("service: ", service)
         sheet = service.spreadsheets()
-        print(sheet)
+        print("sheet: ", sheet)
         result = sheet.values().get(spreadsheetId=self.spreadsheet_id, range=self.sheet_range).execute()
-        print(result)
+        print("result :", result)
         values = result.get('values', [])
-        print(values)
+        print("values: ", values)
         # except:
         #     return "failed"
 
