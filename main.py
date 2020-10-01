@@ -66,7 +66,7 @@ def display(ss_id):
     # 2nd parameter is size of the font
     if os.path.isfile('/home/pi/chalk_daily/chawp.ttf'):
         date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 40)
-        quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 55)
+        quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 52)
         event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 35)
         error_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 20)
     else:  ###############################
@@ -145,7 +145,7 @@ def display(ss_id):
                         quote_str = quote_str[last_space:]
                     quote_text.append(quote_font.render(quote_str, True, white))
                     for line in range(len(quote_text)):
-                        window.blit(quote_text[line], (w // 9.5, (h // 5) + line*quote_font.get_linesize()))
+                        window.blit(quote_text[line], (w // 11, (h // 5) + line*quote_font.get_linesize()))
 
                 ### EVENTS
                 text_x = 4.8 * w // 8
