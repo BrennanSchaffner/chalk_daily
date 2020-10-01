@@ -254,6 +254,9 @@ def what_data(date_str, date_str_no_year, ss_id):
         except IndexError:
             values[i][0] = 'TBD,TBD'
 
+        print(values[i][0])
+        print(date_str)
+        print(date_str_no_year)
         if values[i][0] == date_str or values[i][0] == date_str_no_year:
             today = values[i]
             todays_index = i
