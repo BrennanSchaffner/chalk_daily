@@ -227,11 +227,11 @@ def what_data(date_str, date_str_no_year, ss_id):
     sheet_range = 'A1:F'
 
     sheet_reader = SheetReader(spreadsheet_id, sheet_range)
-    try:
-        values = sheet_reader.download_data()
-    except:
-        print("failed to download data")
-        return "failed"
+    #try:
+    values = sheet_reader.download_data()
+    #except:
+    print("failed to download data")
+    #    return "failed"
 
 
     if not values:
