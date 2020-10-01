@@ -19,6 +19,7 @@ from sheet_reader import SheetReader
 
 def main():
     ss_id = get_sheet_url()
+    print(ss_id)
     if ss_id:
         display(ss_id)
     else:
@@ -42,7 +43,6 @@ def get_sheet_url():
     url = easygui.enterbox("Your Google sheet URL")
     if url == '' or url is None:
         sys.exit()
-
     try:
         after_d = url.split('/d/')[1]
         spreadsheet_id = after_d.split('/edit')[0]
@@ -210,12 +210,12 @@ def display(ss_id):
         if not done:
             #pg.time.wait(1000*60*5)  # ms
             pg.time.wait(10)
-        # print("########################")
-        # print("info dict: ", info_dict)
-        # print("internet: ", internet)
-        # print("date: ", date_str)
-        # print("sheet: ", ss_id)
-        # print("done? ", done)
+        print("########################")
+        print("info dict: ", info_dict)
+        print("internet: ", internet)
+        print("date: ", date_str)
+        print("sheet: ", ss_id)
+        print("done? ", done)
 
     pg.display.quit()
     pg.quit()
