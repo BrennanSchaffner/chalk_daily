@@ -233,6 +233,7 @@ def what_data(date_str, date_str_no_year, ss_id):
         print("failed to download data")
         return "failed"
 
+
     if not values:
         print('No data found.')
     ret_struct = {'date': date_str}
