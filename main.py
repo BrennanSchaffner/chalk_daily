@@ -253,7 +253,7 @@ def what_data(date_str, date_str_no_year, ss_id):
             test = values[i][0][0]
         except IndexError:
             values[i][0] = 'TBD,TBD'
-
+        print(values)
         print(values[i][0])
         print(date_str)
         print(date_str_no_year)
