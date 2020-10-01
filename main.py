@@ -145,7 +145,7 @@ def display(ss_id):
                         quote_str = quote_str[last_space:]
                     quote_text.append(quote_font.render(quote_str, True, white))
                     for line in range(len(quote_text)):
-                        window.blit(quote_text[line], (w // 11, (h // 5) + line*quote_font.get_linesize()))
+                        window.blit(quote_text[line], (w // 13, (h // 5) + line*quote_font.get_linesize()))
 
                 ### EVENTS
                 text_x = 4.8 * w // 8
