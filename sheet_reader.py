@@ -43,16 +43,17 @@ class SheetReader(object):
                     pickle.dump(creds, token)
 
         # Call the Sheets API
-        # try:
-        service = build('sheets', 'v4', credentials=creds)
-        print("service: ", service)
-        sheet = service.spreadsheets()
-        print("sheet: ", sheet)
-        result = sheet.values().get(spreadsheetId=self.spreadsheet_id, range=self.sheet_range).execute()
-        print("result :", result)
-        values = result.get('values', [])
-        print("values: ", values)
-        # except:
-        #     return "failed"
+        try:
+            service = build('sheets', 'v4', credentials=creds)
+            # print("service: ", service)
+            sheet = service.spreadsheets()
+            # print("sheet: ", sheet)
+            result = sheet.values().get(spreadsheetId=self.spreadsheet_id, range=self.sheet_range).execute()
+            # print("result :", result)
+            values = result.get('values', [])
+        # print("values: ", values)
+        except:
+             return "failed"
+                # could mean dont have permissions
 
         return values

@@ -19,7 +19,7 @@ from sheet_reader import SheetReader
 
 def main():
     ss_id = get_sheet_url()
-    print(ss_id)
+    # print(ss_id)
     if ss_id:
         display(ss_id)
     else:
@@ -66,7 +66,7 @@ def display(ss_id):
     # 2nd parameter is size of the font
     if os.path.isfile('/home/pi/chalk_daily/chawp.ttf'):
         date_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 40)
-        quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 63)
+        quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 55)
         event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 35)
         error_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 20)
     else:  ###############################
@@ -97,7 +97,7 @@ def display(ss_id):
         day_of_month = today.strftime("%d").lstrip("0")
         date_str_no_year = day_name + ", " + today.strftime("%B") + " " + day_of_month
         date_str = date_str_no_year + ", " + today.strftime("%Y")
-        print(date_str)
+        # print(date_str)
 
         window.blit(chalkboard, (0, 0))
 
@@ -125,7 +125,7 @@ def display(ss_id):
         internet = internet_connected()
 
         info_dict = what_data(date_str, date_str_no_year, ss_id)
-        print(info_dict)
+        # print(info_dict)
         if internet and info_dict is not "failed":
             if info_dict:
                 quote_max_chars = 24
@@ -145,7 +145,7 @@ def display(ss_id):
                         quote_str = quote_str[last_space:]
                     quote_text.append(quote_font.render(quote_str, True, white))
                     for line in range(len(quote_text)):
-                        window.blit(quote_text[line], (w // 9, (h // 5) + line*quote_font.get_linesize()))
+                        window.blit(quote_text[line], (w // 9.5, (h // 5) + line*quote_font.get_linesize()))
 
                 ### EVENTS
                 text_x = 4.8 * w // 8
@@ -183,7 +183,7 @@ def display(ss_id):
                         text_height += (event_font.get_linesize() + 0.1 / 8)
                     window.blit(upcoming_view_text[line], (text_x, text_height))
             else:
-                quote_text = error_font.render("I couldn't find today in your sheet", True, white)
+                quote_text = error_font.render("I couldn't find today in your sheet. Or maybe I don't have permission to look at it.", True, white)
                 quote_rect = quote_text.get_rect()
                 quote_rect.midleft = (w // 8, h // 2)
                 window.blit(quote_text, quote_rect)
@@ -227,12 +227,11 @@ def what_data(date_str, date_str_no_year, ss_id):
     sheet_range = 'A1:F'
 
     sheet_reader = SheetReader(spreadsheet_id, sheet_range)
-    #try:
-    values = sheet_reader.download_data()
-    #except:
-    print("failed to download data")
-    #    return "failed"
-
+    try:
+        values = sheet_reader.download_data()
+    except:
+        # print("failed to download data")
+        return "failed"
 
     if not values:
         print('No data found.')
@@ -254,12 +253,12 @@ def what_data(date_str, date_str_no_year, ss_id):
             test = values[i][0][0]
         except IndexError:
             values[i][0] = 'TBD,TBD'
-        print("i",i)
-        print("todays index", todays_index)
-        print("values", values)
-        print("values[i][0]", values[i][0])
-        print("date_str", date_str)
-        print("date_str_no_year", date_str_no_year)
+        # print("i",i)
+        # print("todays index", todays_index)
+        # print("values", values)
+        # print("values[i][0]", values[i][0])
+        # print("date_str", date_str)
+        # print("date_str_no_year", date_str_no_year)
         if values[i][0] == date_str or values[i][0] == date_str_no_year:
             today = values[i]
             todays_index = i
@@ -288,7 +287,7 @@ def what_data(date_str, date_str_no_year, ss_id):
                         ret_struct['week_events'].append('       '+values[i+d][4])
             break
     if todays_index is None:
-        print("here ")
+       #  print("here ")
         return 0
 
     ret_struct['important_events'] = []
