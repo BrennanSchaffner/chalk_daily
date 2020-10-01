@@ -69,7 +69,7 @@ def display(ss_id):
         quote_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 63)
         event_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 35)
         error_font = pg.font.Font(r'/home/pi/chalk_daily/chawp.ttf', 20)
-    else: ###############################
+    else:  ###############################
         date_font = pg.font.Font(r'.\chawp.ttf', 40)
         quote_font = pg.font.Font(r'.\chawp.ttf', 50)
         event_font = pg.font.Font(r'.\chawp.ttf', 34)
@@ -80,7 +80,7 @@ def display(ss_id):
     # create a surface object, image is drawn on it.
     if os.path.isfile('/home/pi/chalk_daily/green_chalkboard.jpg'):
         chalkboard = pg.image.load(r'/home/pi/chalk_daily/green_chalkboard.jpg')
-    else: #############################
+    else:  #############################
         chalkboard = pg.image.load(r'.\green_chalkboard.jpg')
 
     # copying the image surface object
@@ -230,12 +230,11 @@ def what_data(date_str, date_str_no_year, ss_id):
     try:
         values = sheet_reader.download_data()
     except:
+        print("failed to download data")
         return "failed"
-
 
     if not values:
         print('No data found.')
-
     ret_struct = {'date': date_str}
     try:
         ret_struct['week_header'] = values[0][2]
@@ -283,6 +282,7 @@ def what_data(date_str, date_str_no_year, ss_id):
                         ret_struct['week_events'].append('       '+values[i+d][4])
             break
     if todays_index is None:
+        print("here ")
         return 0
 
     ret_struct['important_events'] = []
