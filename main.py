@@ -44,6 +44,7 @@ def get_sheet_url():
     if output == 'Enter new link with keyboard':
         url = get_sheet_url_by_link()
         with open("last_sheet_id.txt", "w") as f:
+            print(url)
             f.write(url)
         return url
     elif output == 'Use same as last time':
