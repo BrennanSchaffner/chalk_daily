@@ -47,12 +47,11 @@ def get_sheet_url():
             f.write(url)
         return url
     elif output == 'Use same as last time':
-        try:
-            with open("last_sheet_id.text", "r") as f:
-                url = f.readlines()
+        with open("last_sheet_id.text", "r") as f:
+            url = f.readlines()
             return url
-        except FileNotFoundError:
-            print("didnt find a previously used sheet.")
+        # except FileNotFoundError:
+        #     print("didnt find a previously used sheet.")
     else:
         return 0
 
