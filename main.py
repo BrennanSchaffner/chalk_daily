@@ -49,7 +49,7 @@ def get_sheet_url():
         return url
     elif output == 'Use same as last time':
         with open("last_sheet_id.txt", "r") as f:
-            url = f.readlines().strip()
+            url = f.readline().strip()
             print(url)
             return url
         # except FileNotFoundError:
