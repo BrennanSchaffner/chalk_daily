@@ -48,7 +48,8 @@ def get_sheet_url():
         return url
     elif output == 'Use same as last time':
         with open("last_sheet_id.txt", "r") as f:
-            url = f.readlines()
+            url = f.readlines().strip()
+            print(url)
             return url
         # except FileNotFoundError:
         #     print("didnt find a previously used sheet.")
@@ -225,8 +226,8 @@ def display(ss_id):
 
         pg.display.flip()
         if not done:
-            pg.time.wait(1000*60*5)  # ms
-            #pg.time.wait(10)
+            #pg.time.wait(1000*60*5)  # ms
+            pg.time.wait(10)
         print("########################")
         print("info dict: ", info_dict)
         print("internet: ", internet)
