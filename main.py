@@ -40,6 +40,24 @@ def internet_connected(host='http://google.com'):
 
 
 def get_sheet_url():
+    output = easygui.buttonbox("","Let's get that sheet URL", ['Enter new link with keyboard', 'Use same as last time'])
+    if output == 'Enter new link with keyboard':
+        url = get_sheet_url_by_link()
+        with open("last_sheet_id.txt", "w") as f:
+            print(url, file=f)
+        return url
+    elif output == 'Use same as last time':
+        try:
+            with open("last_sheet_id.text", "r") as f:
+                url = f.readlines()
+            return url
+        except FileNotFoundError:
+            print("didnt find a previously used sheet.")
+    else:
+        return 0
+
+
+def get_sheet_url_by_link():
     url = easygui.enterbox("Your Google sheet URL")
     if url == '' or url is None:
         sys.exit()
