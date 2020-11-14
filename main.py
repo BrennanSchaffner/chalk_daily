@@ -10,6 +10,7 @@ import easygui
 import sys
 import os.path
 import urllib
+from pathlib import Path
 
 from sheet_reader import SheetReader
 
@@ -48,12 +49,18 @@ def get_sheet_url():
             f.write(url)
         return url
     elif output == 'Use same as last time':
-        with open("/home/pi/chalk_daily/last_sheet_id.txt", "r") as f:
-            url = f.readline().strip()
-            print(url)
-            return url
-        # except FileNotFoundError:
-        #     print("didnt find a previously used sheet.")
+        if os.path.isfile('/home/pi/chalk_daily/last_sheet_id.txt'):
+            with open("/home/pi/chalk_daily/last_sheet_id.txt", "r") as f:
+                url = f.readline().strip()
+                print(url)
+                return url
+            # except FileNotFoundError:
+            #     print("didnt find a previously used sheet.")
+        elif os.path.isfile('.\last_sheet_id.txt'):
+            with open('.\last_sheet_id.txt', "r") as f:
+                url = f.readline().strip()
+                print(url)
+                return url
     else:
         return 0
 
@@ -92,6 +99,7 @@ def display(ss_id):
         date_font = pg.font.Font(r'.\chawp.ttf', 40)
         quote_font = pg.font.Font(r'.\chawp.ttf', 50)
         event_font = pg.font.Font(r'.\chawp.ttf', 34)
+        # error_font = pg.font.Font(r'\chawp.ttf', 20)
 
     # set the pygame window name
     pg.display.set_caption('Chalk Daily')
@@ -143,7 +151,7 @@ def display(ss_id):
         window.blit(date_text, date_rect)
         internet = internet_connected()
 
-        info_dict = what_data(date_str, date_str_no_year, ss_id)
+        info_dict = what_data(date_str, ss_id)
         # print(info_dict)
         if internet and info_dict is not "failed":
             if info_dict:
@@ -240,7 +248,7 @@ def display(ss_id):
     pg.quit()
 
 
-def what_data(date_str, date_str_no_year, ss_id):
+def what_data(date_str, ss_id):
     # The ID and range of a sample spreadsheet.
     spreadsheet_id = ss_id
     sheet_range = 'A1:F'
@@ -278,7 +286,7 @@ def what_data(date_str, date_str_no_year, ss_id):
         # print("values[i][0]", values[i][0])
         # print("date_str", date_str)
         # print("date_str_no_year", date_str_no_year)
-        if values[i][0] == date_str or values[i][0] == date_str_no_year:
+        if values[i][0] == date_str:
             today = values[i]
             todays_index = i
             try:
@@ -314,7 +322,10 @@ def what_data(date_str, date_str_no_year, ss_id):
         try:
             test = row[0][0]
         except IndexError:
-            row[0] = 'TBD,TBD'
+            if row:
+                row[0] = 'TBD,TBD'
+            else:
+                row = ['TBD, TBD']
 
         if len(row) > 2 and row[2] != '':
             if (len(row) > 3) and (row[3] == '*') and (len(ret_struct['important_events']) < 8):
