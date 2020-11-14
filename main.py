@@ -10,7 +10,6 @@ import easygui
 import sys
 import os.path
 import urllib
-from pathlib import Path
 
 from sheet_reader import SheetReader
 
